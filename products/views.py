@@ -1,7 +1,8 @@
 from django.shortcuts import render
 from .models import Category, Product, Inventory
 from django.urls import reverse_lazy
-from django.views.generic import CreateView
+from django.views.generic import CreateView, DeleteView, DetailView
+
 
 def home(request):
     categories = Category.objects.all()
@@ -21,8 +22,18 @@ class ProductCategoryView(CreateView):
     template_name = 'products/product_category.html'
     success_url = reverse_lazy('home')
 
+class ProductDeleteView(DeleteView):
+    model = Product
+    fields = ['product_name', 'product_stock', 'deleted_at', 'deleted_by']
+    template_name = 'product_confirm_delete.html'
+    success_url = reverse_lazy('product_list')
+
 class ProductInventoryView(CreateView):
     model = Inventory
     fields = ['product', 'stock']
     template_name = 'products/product_inventory.html'
     success_url = reverse_lazy('home')
+
+class ProductDetailView(DetailView):
+    model = Product
+    template_name = 'products/product_detail.html'

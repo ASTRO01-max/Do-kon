@@ -8,7 +8,7 @@
 <body class="bg-gray-100 py-8 px-4">
   <div class="max-w-6xl mx-auto">
     <h1 class="text-3xl font-bold text-center text-gray-800 mb-8">📂 Kategoriyalar ro‘yxati</h1>
-
+    <a href="{% url 'product_add' %}">Product Add</a>
     <div class="space-y-6">
       {% for category in categories %}
         <div class="bg-white shadow-md rounded-xl p-6">
@@ -21,6 +21,7 @@
                 <div class="flex justify-between items-center">
                   <span class="font-medium text-gray-800">{{ pr.name }}</span>
                   <span class="text-green-600 font-semibold">${{ pr.price }}</span>
+                  <a href="{%url'product_detail' pr.pk %}">Detalis</a>
                 </div>
 
                 <div class="mt-2 text-sm text-gray-500">
