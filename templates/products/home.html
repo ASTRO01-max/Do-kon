@@ -7,33 +7,55 @@
 </head>
 <body class="bg-gray-100 py-8 px-4">
   <div class="max-w-6xl mx-auto">
-    <h1 class="text-3xl font-bold text-center text-gray-800 mb-8">📂 Kategoriyalar ro‘yxati</h1>
-    <a href="{% url 'product_add' %}">Product Add</a>
+    <div class="flex justify-between items-center mb-8">
+      <h1 class="text-3xl font-bold text-gray-800">📂 Kategoriyalar ro‘yxati</h1>
+      <a href="{% url 'product_add' %}" class="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded shadow">
+        ➕ Mahsulot qo‘shish
+      </a>
+    </div>
+
     <div class="space-y-6">
       {% for category in categories %}
         <div class="bg-white shadow-md rounded-xl p-6">
-          <h2 class="text-xl font-semibold text-blue-700">{{ category.name }}</h2>
+          <div class="flex justify-between items-center mb-2">
+            <h2 class="text-xl font-semibold text-blue-700">{{ category.name }}</h2>
+            <a href="{% url 'category_detail' category.pk %}" class="text-blue-600 hover:underline font-medium">
+              Kategoriya tafsilotlari →
+            </a>
+          </div>
           <p class="text-gray-600 mb-4">{{ category.description }}</p>
 
           <div class="space-y-4">
             {% for pr in category.products.all %}
               <div class="border border-gray-200 rounded-lg p-4 bg-gray-50">
                 <div class="flex justify-between items-center">
-                  <span class="font-medium text-gray-800">{{ pr.name }}</span>
-                  <span class="text-green-600 font-semibold">${{ pr.price }}</span>
-                  <a href="{%url'product_detail' pr.pk %}">Detalis</a>
+                  <div>
+                    <span class="font-medium text-gray-800">{{ pr.name }}</span>
+                    <span class="text-sm text-gray-500 block">
+                      Narxi: <span class="text-green-600 font-semibold">${{ pr.price }}</span>
+                    </span>
+                  </div>
+                  <a href="{% url 'product_detail' pr.pk %}" class="text-blue-600 hover:underline font-medium">
+                    Mahsulot tafsilotlari →
+                  </a>
                 </div>
 
                 <div class="mt-2 text-sm text-gray-500">
                   Ombordagi soni:
                   {% for inv in pr.inventory.all %}
                     <span class="inline-block bg-green-100 text-green-800 rounded px-2 py-1 mr-2">{{ inv.stock }}</span>
+                  {% empty %}
+                    <span class="text-red-500">Ma'lumot yo‘q</span>
                   {% endfor %}
                 </div>
               </div>
+            {% empty %}
+              <p class="text-gray-400 italic">Bu kategoriya ostida mahsulot mavjud emas.</p>
             {% endfor %}
           </div>
         </div>
+      {% empty %}
+        <p class="text-gray-500 italic">Hech qanday kategoriya mavjud emas.</p>
       {% endfor %}
     </div>
   </div>

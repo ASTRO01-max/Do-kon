@@ -2,7 +2,7 @@
 <html lang="uz">
 <head>
     <meta charset="UTF-8">
-    <title>{{ object.name }} — Mahsulot tafsilotlari</title>
+    <title>{{ object.name }} — Kategoriya tafsilotlari</title>
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
 <body class="bg-gray-100 min-h-screen flex items-center justify-center px-4">
@@ -10,19 +10,6 @@
         <h1 class="text-2xl font-bold text-gray-800 border-b pb-2">
             🛍️ {{ object.name }}
         </h1>
-
-        <div class="text-sm text-gray-600">
-            <span class="font-semibold">Kategoriya:</span>
-            <span class="inline-block bg-blue-100 text-blue-700 px-2 py-1 rounded">
-                {{ object.category.name }}
-            </span>
-        </div>
-
-        <div class="mt-4">
-            <p class="text-lg text-green-600 font-semibold">
-                Narxi: ${{ object.price }}
-            </p>
-        </div>
 
         {% if object.description %}
             <div class="mt-2">

@@ -37,3 +37,7 @@ class ProductInventoryView(CreateView):
 class ProductDetailView(DetailView):
     model = Product
     template_name = 'products/product_detail.html'
+
+class CategoryDetailView(DetailView):
+    model = Category
+    template_name = 'category/category_detail.html'
