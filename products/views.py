@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from .models import Category, Product, Inventory
 from django.urls import reverse_lazy
-from django.views.generic import CreateView, DeleteView, DetailView
+from django.views.generic import CreateView, DeleteView, DetailView, UpdateView
 
 
 def home(request):
@@ -40,4 +40,10 @@ class ProductDetailView(DetailView):
 
 class CategoryDetailView(DetailView):
     model = Category
-    template_name = 'category/category_detail.html'
+    template_name = 'products/category_detail.html'
+
+class ProductUpdateView(UpdateView):
+    model = Product
+    fields = ['category', 'name', 'real_price', 'price', 'expiration_data', 'description', 'barcode']
+    template_name = 'products/product_update.html'
+    success_url = reverse_lazy('home')
